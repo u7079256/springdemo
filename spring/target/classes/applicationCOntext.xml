@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在使用初始化方法和摧毁方法的时候不能只在对应impl文件中写出,还需要进行xml的配置以让spring 识别-->
+    <bean id="userDao" class="com.heima.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy"></bean>
+    <!-- // 默认scope 是 单例,每个spring 容器都是唯一存在的, prototype 可以改为不唯一存在-->
+    <bean id="UserDaoProto" class="com.heima.dao.impl.UserDaoProtoImpl" scope="prototype"></bean>
+    <bean id="UserDaoFactory" class="com.heima.factory.StaticFactory" factory-method="getUserDao"></bean>
+    <bean id="dynamicFactory" class="com.heima.factory.StaticFactory"></bean>
+    <bean id="dynamicUserDaoFactory" factory-bean="dynamicFactory" factory-method="getUserDaoDynamic"></bean>
+    <bean id="UserService" class="com.heima.service.impl.UserServiceImpl"></bean>
+    <bean id="betterService" class="com.heima.service.impl.betterUserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="constructorService" class="com.heima.service.impl.UseContractorService">
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+    <bean id="UserDaoNormalArgs" class="com.heima.dao.impl.AddInProperty">
+        <property name="age" value="22"/>
+        <property name="name" value="terry"/>
+    </bean>
+</beans>
