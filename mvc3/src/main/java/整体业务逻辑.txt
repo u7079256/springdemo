@@ -1,0 +1,6 @@
+1. 导入spring-mvc
+2. 配置springmvc 控制器 DispatcherServlet
+3. 创建Controller类和视图页面
+4. 使用注解配置controller 中业务方法的映射地址
+5. 配置springMVC 核心文件 spring-mvc.xml
+6. 客户端发起请求测试
