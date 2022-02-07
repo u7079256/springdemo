@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -185,5 +187,22 @@ public class UserController {
         System.out.println(user_agent); //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36 Edg/98.0.1108.43
         System.out.println(sessionId); // 2051C6FA59457BA9927A228379B3F9D1
         System.out.println(cookie); //JSESSIONID=2051C6FA59457BA9927A228379B3F9D1
+    }
+    @RequestMapping ("/quick19")
+    @ResponseBody
+    public void save19(@RequestHeader(value = "User-Agent",required = false) String user_agent
+            ,@CookieValue(value = "JSESSIONID") String sessionId,
+                       @RequestHeader(value = "Cookie",required = false) String cookie) throws IOException{
+        System.out.println(user_agent); //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36 Edg/98.0.1108.43
+        System.out.println(sessionId); // 2051C6FA59457BA9927A228379B3F9D1
+        System.out.println(cookie); //JSESSIONID=2051C6FA59457BA9927A228379B3F9D1
+    }
+    @RequestMapping ("/quick20")
+    @ResponseBody
+    public void save20(String username, MultipartFile upload) throws IOException {
+        System.out.println(username);
+        System.out.println(upload);
+        String originName = upload.getOriginalFilename();
+        upload.transferTo(new File("D:\\springgit\\springdemo\\mvc3\\src\\main\\java\\mvcdemo"+originName));
     }
 }
