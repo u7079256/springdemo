@@ -24,5 +24,13 @@
     </bean-->
     <!-- 配置 mvc注解器可以起到手动配置adapter的作用,将对象自动转换为json-->
     <!-- 注意提前设置mvc 空间-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionServices"/>
+    <!-- 声明date格式转换器-->
+    <bean id="conversionServices" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="mvcdemo.converter.DateConverter"></bean>
+            </list>
+        </property>
+    </bean>
 </beans>

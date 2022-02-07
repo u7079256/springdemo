@@ -2,6 +2,12 @@ package mvcdemo.controller.sampleObj;
 
 public class User {
     String name;
+
+    @Override
+    public String toString() {
+        return "User{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
+
     int age;
 
     public String getName() {
